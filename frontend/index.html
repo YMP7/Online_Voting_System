@@ -1,1 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVote - Online Voting System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-vote-yea"></i>
+                <span>SecureVote</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <button class="btn btn-outline" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> Register
+                </button>
+            </div>
+            <div class="nav-user-menu" id="navUserMenu" style="display: none;">
+                <span class="user-greeting" id="userGreeting"></span>
+                <button class="btn btn-outline" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Landing Page -->
+    <div id="landingPage" class="landing-page">
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Secure. Transparent. Democratic.</h1>
+                <p class="hero-subtitle">Experience the future of voting with our advanced online voting platform</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg" id="heroRegisterBtn">
+                        <i class="fas fa-rocket"></i> Get Started
+                    </button>
+                    <button class="btn btn-outline btn-lg" id="heroLoginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="floating-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure</h3>
+                    <p>Enterprise-grade security</p>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Real-time</h3>
+                    <p>Live result tracking</p>
+                </div>
+                <div class="floating-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Accessible</h3>
+                    <p>Vote from anywhere</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <h2 class="section-title">Why Choose SecureVote?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>End-to-End Security</h3>
+                    <p>Military-grade encryption ensures your vote is protected and anonymous</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Vote seamlessly from any device - desktop, tablet, or smartphone</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Instant Results</h3>
+                    <p>Watch election results update in real-time with beautiful visualizations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>One Vote Per User</h3>
+                    <p>Advanced verification prevents duplicate voting and ensures fairness</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+                <button class="close-btn" data-modal="loginModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginUsername">
+                            <i class="fas fa-user"></i> Username or Email
+                        </label>
+                        <input type="text" id="loginUsername" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <input type="password" id="loginPassword" class="form-control" required>
+                    </div>
+                    <div id="loginError" class="error-message" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </form>
+                <p class="modal-footer-text">
+                    Don't have an account? 
+                    <a href="#" id="switchToRegister">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Register</h2>
+                <button class="close-btn" data-modal="registerModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerUsername">
+                            <i class="fas fa-user"></i> Username
+                        </label>
+                        <input type="text" id="registerUsername" class="form-control" minlength="3" maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" id="registerEmail" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">
+                            <i class="fas fa-lock"></i> Password
+                        </label>
+                        <input type="password" id="registerPassword" class="form-control" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">
+                            <i class="fas fa-lock"></i> Confirm Password
+                        </label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required>
+                    </div>
+                    <div id="registerError" class="error-message" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </form>
+                <p class="modal-footer-text">
+                    Already have an account? 
+                    <a href="#" id="switchToLogin">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="userDashboard" class="dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-vote-yea"></i> Active Elections</h1>
+            <p>Cast your vote in ongoing elections</p>
+        </div>
+
+        <div id="noElectionsMessage" class="empty-state" style="display: none;">
+            <i class="fas fa-inbox"></i>
+            <h3>No Active Elections</h3>
+            <p>There are no elections available for voting at the moment. Please check back later.</p>
+        </div>
+
+        <div id="electionsContainer" class="elections-container"></div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="dashboard" style="display: none;">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-crown"></i> Admin Dashboard</h1>
+            <p>Manage elections, candidates, and view results</p>
+        </div>
+
+        <div class="admin-actions">
+            <button class="btn btn-primary" id="createElectionBtn">
+                <i class="fas fa-plus"></i> Create Election
+            </button>
+            <button class="btn btn-secondary" id="addCandidateBtn">
+                <i class="fas fa-user-plus"></i> Add Candidate
+            </button>
+        </div>
+
+        <div class="admin-sections">
+            <!-- Elections Management -->
+            <div class="admin-section">
+                <h2><i class="fas fa-poll"></i> All Elections</h2>
+                <div id="adminElectionsContainer" class="admin-elections-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Election Modal -->
+    <div id="createElectionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus"></i> Create New Election</h2>
+                <button class="close-btn" data-modal="createElectionModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createElectionForm">
+                    <div class="form-group">
+                        <label for="electionTitle">
+                            <i class="fas fa-heading"></i> Election Title
+                        </label>
+                        <input type="text" id="electionTitle" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="electionDescription">
+                            <i class="fas fa-align-left"></i> Description
+                        </label>
+                        <textarea id="electionDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="electionActive">
+                            <span>Start election immediately</span>
+                        </label>
+                    </div>
+                    <div id="createElectionError" class="error-message" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-plus"></i> Create Election
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Candidate Modal -->
+    <div id="addCandidateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Add Candidate</h2>
+                <button class="close-btn" data-modal="addCandidateModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addCandidateForm">
+                    <div class="form-group">
+                        <label for="candidateElection">
+                            <i class="fas fa-poll"></i> Select Election
+                        </label>
+                        <select id="candidateElection" class="form-control" required>
+                            <option value="">-- Select Election --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidateName">
+                            <i class="fas fa-user"></i> Candidate Name
+                        </label>
+                        <input type="text" id="candidateName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="candidateDescription">
+                            <i class="fas fa-align-left"></i> Description
+                        </label>
+                        <textarea id="candidateDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div id="addCandidateError" class="error-message" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-user-plus"></i> Add Candidate
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Results Modal -->
+    <div id="resultsModal" class="modal modal-large">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-chart-bar"></i> Election Results</h2>
+                <button class="close-btn" data-modal="resultsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="resultsContent">
+                    <div class="results-header">
+                        <h3 id="resultsElectionTitle"></h3>
+                        <p id="resultsTotalVotes"></p>
+                    </div>
+                    <div class="results-chart-container">
+                        <canvas id="resultsChart"></canvas>
+                    </div>
+                    <div id="resultsTable" class="results-table"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vote Confirmation Modal -->
+    <div id="voteConfirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Confirm Your Vote</h2>
+                <button class="close-btn" data-modal="voteConfirmModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="vote-confirm-content">
+                    <i class="fas fa-exclamation-triangle vote-warning-icon"></i>
+                    <h3>Are you sure?</h3>
+                    <p>You are about to vote for:</p>
+                    <div class="vote-details">
+                        <strong id="confirmCandidateName"></strong>
+                        <p id="confirmElectionName"></p>
+                    </div>
+                    <p class="vote-warning">
+                        <i class="fas fa-info-circle"></i>
+                        You can only vote once in this election. This action cannot be undone.
+                    </p>
+                </div>
+                <div id="voteConfirmError" class="error-message" style="display: none;"></div>
+                <div class="button-group">
+                    <button class="btn btn-outline" data-modal="voteConfirmModal">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                    <button class="btn btn-success" id="confirmVoteBtn">
+                        <i class="fas fa-check"></i> Confirm Vote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="successToast" class="toast toast-success">
+        <i class="fas fa-check-circle"></i>
+        <span id="successToastMessage"></span>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/user.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
